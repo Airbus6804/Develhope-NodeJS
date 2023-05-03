@@ -1,5 +1,4 @@
 import { createServer } from "node:http";
-import fs from "node:fs"
 
 const server = createServer((request, response) => {
     console.log("request received");
@@ -9,7 +8,7 @@ const server = createServer((request, response) => {
     response.setHeader("Content-Type", "text/html");
 
     response.end(
-        fs.readFileSync("./index.html")
+        "<html><body><h1>Test Page</h1></body></html>"
     );
 });
 
