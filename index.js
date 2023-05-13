@@ -1,24 +1,34 @@
-const players = ["Joe", "Caroline", "Sabrina"];
+const express = require("express");
+const morgan = require("morgan");
+require("dotenv").config();
 
-function luckyDraw(player) {
-    return new Promise((resolve, reject) => {
-        const win = Boolean(Math.round(Math.random()));
+let planets = [
+    {
+        id: 1,
+        name: "Earth",
+    },
+    {
+        id: 2,
+        name: "Mars",
+    },
+];
 
-        process.nextTick(() => {
-            if (win) {
-                resolve(`${player} won a prize in the draw!`);
-            } else {
-                reject(new Error(`${player} lost the draw.`));
-            }
-        });
-    });
-}
+const app = express()
+app.use(morgan())
+app.use(express.json());
+app.use((req, res, next) => {
+    console.log(req)
+    next();
+})
 
-players.forEach(async (player) => {
-    try {
-        const win = await luckyDraw(player);
-        console.log(win);
-    } catch (err) {
-        console.log(err);
-    }
-});
+app.get("/", (req, res) => {
+    res.status(200).json(planets)
+})
+
+app.listen(process.env.PORT, () => {
+    console.log(`Listening on port ${process.env.PORT}`)
+})
+
+
+
+
