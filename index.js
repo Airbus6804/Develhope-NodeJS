@@ -1,4 +1,4 @@
-const players = ["Joe", "Caroline", "Sabrina"]
+const players = ["Joe", "Caroline", "Sabrina"];
 
 function luckyDraw(player) {
     return new Promise((resolve, reject) => {
@@ -14,6 +14,11 @@ function luckyDraw(player) {
     });
 }
 
-players.forEach((player) => luckyDraw(player).then(console.log).catch(console.log));
-
-
+players.forEach(async (player) => {
+    try {
+        const win = await luckyDraw(player);
+        console.log(win);
+    } catch (err) {
+        console.log(err);
+    }
+});
