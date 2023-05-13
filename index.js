@@ -1,3 +1,7 @@
-const figlet = require("figlet");
+const fs = require("fs");
 
-console.log(figlet.textSync("Develhope"))
+const data = new Uint8Array(Buffer.from("Prova fs"))
+
+fs.writeFile("./TestFs.txt", data, (error) => {
+    if(error) console.log(error);
+})
